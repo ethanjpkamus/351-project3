@@ -2,7 +2,7 @@ CXXFLAGS = -g -std=c++17 -Wall -Wextra -Wpedantic -pthread
 
 .PHONY: check check-leaks check-threads clean
 
-example: client.o threadpool.o
+project3: client.o threadpool.o
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 threadpool.o: threadpool.cpp threadpool.h
@@ -10,11 +10,11 @@ threadpool.o: threadpool.cpp threadpool.h
 
 check: check-leaks check-threads
 
-check-leaks: example
+check-leaks: project3
 	valgrind --quiet ./$<
 
-check-threads: example
+check-threads: project3
 	valgrind --tool=helgrind --quiet ./$<
 
 clean:
-	rm -f *.o example
+	rm -f *.o project3
